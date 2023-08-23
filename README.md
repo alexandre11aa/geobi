@@ -1,2 +1,3 @@
 # metodo_das_bissetrizes
-Método das bissetrizes
+
+Método das bissetrizes.
