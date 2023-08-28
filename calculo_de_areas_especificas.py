@@ -4,7 +4,6 @@ from scipy.spatial import cKDTree
 from shapely.geometry import Polygon
 
 # Áreas interiores pelo método das bissetrizes
-
 def areas_e_centroides_de_interiores(poligonos, pontos_de_interseccao, lados_das_retas):
     areas_dos_poligonos = []
 
