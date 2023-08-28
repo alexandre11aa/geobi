@@ -4,6 +4,7 @@ from scipy.spatial import cKDTree
 from shapely.geometry import Polygon
 
 # Áreas interiores pelo método das bissetrizes
+
 def areas_e_centroides_de_interiores(poligonos, pontos_de_interseccao, lados_das_retas):
     areas_dos_poligonos = []
 
@@ -110,7 +111,6 @@ def lados_das_retas_das_bissetrizes(comprimentos):
         
         # Polígono maior que 4 lados 
         else:
-            
             soma_de_comprimentos, ponteiro = [[],2]
             
             for j in range(len(comprimentos[i])):
