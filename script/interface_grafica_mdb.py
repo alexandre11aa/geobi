@@ -152,24 +152,14 @@ class interface(QMainWindow, funcoes):
 
     def tela(self):
 
+        # 0.0 Configurações da janela
+        
         self.setWindowTitle("Método das Bissetrizes")
-
-        # Defina o ícone codificado em base64
-        icon_base64 = imagens('icone')  # Sua string base64 aqui
-
-        # Decodifique a string base64 para obter os bytes da imagem
-        icon_bytes = base64.b64decode(icon_base64)
-
-        # Crie um pixmap a partir dos bytes da imagem
-        pixmap = QPixmap()
-        pixmap.loadFromData(icon_bytes)
-
-        # Defina o ícone da janela
-        self.setWindowIcon(QIcon(pixmap))
-
-
         self.setWindowFlag(Qt.WindowMaximizeButtonHint, False)
         self.setGeometry(100, 100, 400, 265)
+        pixmap = QPixmap()
+        pixmap.loadFromData(base64.b64decode(imagens('icone')))
+        self.setWindowIcon(QIcon(pixmap))
 
         # 1.0 Configurações do fundo
 
