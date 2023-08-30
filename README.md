@@ -6,6 +6,6 @@ Na pasta "script" está presente os códigos em python da ferramenta executável
 
 Para baixar o ".zip" para instalar o plugin no QGis acesse:
 
-Para baixar o executável que funciona de forma independente do QGis acesse:
+Para baixar o executável que funciona de forma independente acesse:
 
 Autor: Alexandre Estrela de L. Nóbrega
