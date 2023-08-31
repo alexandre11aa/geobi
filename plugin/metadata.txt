@@ -1,12 +1,12 @@
 [general]
 name=GeoBi
 qgisMinimumVersion=3.0
-about=Ferramenta para cálculo áreas de contribuição do sistema de microdrenagem através método das bissetrizes.
+about=Ferramenta para cálculo áreas de contribuição, em sistemas de microdrenagem, através do método das bissetrizes.
 description=Método das bissetrizes
 version=0.1
 author=Alexandre Estrela de Lacerda Nóbrega
 email=alexandrestrelaln@gmail.com
-repository=https://github.com/alexandre11aa
+repository=https://github.com/alexandre11aa/geobi
 homepage=https://github.com/alexandre11aa
 category=Plugins
 icon=icone_de_mdb.png
