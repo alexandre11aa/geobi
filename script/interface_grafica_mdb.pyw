@@ -5,8 +5,8 @@ import base64
 import geopandas as gpd
 
 from PyQt5.QtWidgets import QMainWindow, QLabel, QLineEdit, QPushButton, QComboBox, QFileDialog, QMessageBox, QApplication
-from PyQt5.QtCore import Qt.WindowMaximizeButtonHint, Qt.WindowNoState 
-from PyQt5.QtGui import QPixmap 
+from PyQt5.QtGui import QPixmap, QIcon
+from PyQt5.QtCore import Qt
 
 from metodo_das_bissetrizes import mdb_poligonos_internos
 from metodo_das_bissetrizes import mdb_poligonos_externos
