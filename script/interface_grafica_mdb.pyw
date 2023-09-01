@@ -32,10 +32,10 @@ class funcoes():
     # Quantidade de vértices limite para cálculo dos polígonos
     def numero_de_poligonos(self):
 
-        if self.lista_de_lados_do_poligono.currentText() == "Iguais à três vértices":
+        if self.lista_de_lados_do_poligono.currentText() == "Iguais a três vértices":
             self.nmr_de_vertices = 4
             
-        elif self.lista_de_lados_do_poligono.currentText() == "Menores ou iguais à quatro vértices":
+        elif self.lista_de_lados_do_poligono.currentText() == "Menores ou iguais a quatro vértices":
             self.nmr_de_vertices = 5
 
         elif self.lista_de_lados_do_poligono.currentText() == "Qualquer número de vértices (*)":
@@ -123,22 +123,21 @@ class funcoes():
     def ajuda_1(self):
 
         mensagem  = 'Para que o cálculo funcione corretamente, é preciso inserir um arquivo shapefile com polígonos regulares desenhados. '
-        mensagem += 'O gerador de lotes irá calcular e gerar as linhas e pontos das bissetrizes e áreas dos polígonos desenhados em dois shapefiles distintos. '
-        mensagem += 'A área gerada será em unidades de mapa, ou seja, graus quadrados. '
-        mensagem += 'Para visualizar os valores das áreas no QGIS é preciso habilitar as etiquetas, caso contrário, apenas pontos aparecerão. '
-        mensagem += 'Além disso, polígonos com mais de quatro vértices possuem mais chances de apresentarem erros de cálculo.'
+        mensagem += 'O gerador de lotes irá calcular e gerar as linhas das bissetrizes para polígonos com qualquer quantidade de vertices, '
+        mensagem += 'e calculará as áreas na unidade do SRC escolhido, dos polígonos iguais ou menores que quatro vertices gerando pontos em '
+        mensagem += 'seus centros. Para visualizar os valores das áreas no QGIS é preciso habilitar as etiquetas, caso contrário, apenas '
+        mensagem += 'pontos aparecerão.'
 
         QMessageBox.information(self, "   A J U D A !", mensagem)
 
     # Informações sobre polígonos e áreas de rua
     def ajuda_2(self):
 
-        mensagem  = 'Para que o cálculo funcione corretamente, é preciso que o arquivo shapefile anterior com polígonos continue o mesmo, e seja inserido '
-        mensagem += 'um novo arquivo shapefile de pontos que delimitem a distância dos vértices dos polígonos aos possíveis poços de visita ou cruzamentos. '
-        mensagem += 'O gerador de ruas irá calcular e gerar as linhas e pontos das áreas de polígonos externos aos criados inicialmente pelo usuário. '
-        mensagem += 'A área gerada será em unidades de mapa, ou seja, graus quadrados. '
-        mensagem += 'Para visualizar os valores das áreas no QGIS é preciso habilitar as etiquetas, caso contrário, apenas pontos aparecerão. '
-        mensagem += 'Além disso, não é possível fazer tal cálculo para polígonos com mais de quatro vértices.'
+        mensagem  = 'Para que o cálculo funcione corretamente, é preciso que o arquivo shapefile anterior com polígonos continue o mesmo, '
+        mensagem += 'e seja inserido um novo arquivo shapefile de pontos que delimitem a distância dos vértices dos polígonos aos possíveis '
+        mensagem += 'poços de visita ou cruzamentos. O gerador de ruas irá calcular e gerar as linhas e calculará as áreas na unidade do SRC '
+        mensagem += 'escolhido, dos polígonos iguais ou menores que quatro vertices gerando pontos em seus centros. Para visualizar os '
+        mensagem += 'valores das áreas no QGIS é preciso habilitar as etiquetas, caso contrário, apenas pontos aparecerão.'
 
         QMessageBox.information(self, "   A J U D A !", mensagem)
 
