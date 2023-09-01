@@ -195,8 +195,8 @@ class interface(QMainWindow, funcoes):
         self.lista_de_lados_do_poligono = QComboBox(self)
         self.lista_de_lados_do_poligono.setGeometry(100, 170, 255, 22)
         self.lista_de_lados_do_poligono.move(115, 70)
-        self.lista_de_lados_do_poligono.addItems(["Iguais à três vértices", 
-                                                  "Menores ou iguais à quatro vértices", 
+        self.lista_de_lados_do_poligono.addItems(["Iguais a três vértices", 
+                                                  "Menores ou iguais a quatro vértices", 
                                                   "Qualquer número de vértices (*)"])
 
         # 1.3 Gerar
