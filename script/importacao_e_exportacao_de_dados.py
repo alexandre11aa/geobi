@@ -91,7 +91,7 @@ def exportando_informacoes_internas(poligonos,
 # Exportando shapefile de linhas e áreas externas dos polígonos
 
 def exportando_informacoes_externas(coordenadas_externas, 
-                                    coordenada_das_areas_dos_poligonos, 
+                                    poligono_das_areas_dos_poligonos, 
                                     areas_dos_poligonos, 
                                     gdf):
 
@@ -102,6 +102,6 @@ def exportando_informacoes_externas(coordenadas_externas,
     novo_gdf_linhas = gpd.GeoDataFrame({"geometry": linhas}, crs=gdf)
 
     # Criar as áreas (Para vê-las é necessário ativar as etiquetas nas configurações do ponto)
-    novo_gdf_areas = gpd.GeoDataFrame({'geometry': coordenada_das_areas_dos_poligonos, 'area': areas_dos_poligonos}, crs=gdf)
+    novo_gdf_areas = gpd.GeoDataFrame({'geometry': poligono_das_areas_dos_poligonos, 'area': areas_dos_poligonos}, crs=gdf)
 
     return novo_gdf_linhas, novo_gdf_areas
