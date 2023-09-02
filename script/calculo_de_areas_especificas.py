@@ -9,7 +9,7 @@ from shapely.geometry import Polygon, Point
 def areas_e_centroides_de_interiores(poligonos, pontos_de_interseccao, lados_das_retas):
     areas_dos_poligonos = []
 
-    coordenada_das_areas_dos_poligonos = []
+    novos_poligonos_gerados = []
 
     for i in range(len(poligonos)):
 
@@ -21,9 +21,9 @@ def areas_e_centroides_de_interiores(poligonos, pontos_de_interseccao, lados_das
                                                         poligonos[i][j+1], 
                                                         pontos_de_interseccao[i][0])).area))
                 
-                coordenada_das_areas_dos_poligonos.append(Polygon((poligonos[i][j], 
-                                                                   poligonos[i][j+1], 
-                                                                   pontos_de_interseccao[i][0])).centroid)
+                novos_poligonos_gerados.append(Polygon((poligonos[i][j], 
+                                                        poligonos[i][j+1], 
+                                                        pontos_de_interseccao[i][0])))
                 
             # Área dos polígonos de quatro vértices
             elif len(poligonos[i]) == 5:
@@ -33,35 +33,39 @@ def areas_e_centroides_de_interiores(poligonos, pontos_de_interseccao, lados_das
                                                             poligonos[i][j+1], 
                                                             pontos_de_interseccao[i][0])).area))
                     
-                    coordenada_das_areas_dos_poligonos.append(Polygon((poligonos[i][j], 
-                                                                       poligonos[i][j+1], 
-                                                                       pontos_de_interseccao[i][0])).centroid)
+                    novos_poligonos_gerados.append(Polygon((poligonos[i][j], 
+                                                            poligonos[i][j+1], 
+                                                            pontos_de_interseccao[i][0])))
 
                 elif (j == lados_das_retas[i][1]):
                     areas_dos_poligonos.append(str(Polygon((poligonos[i][j], 
                                                             poligonos[i][j+1], 
                                                             pontos_de_interseccao[i][1])).area))
                     
-                    coordenada_das_areas_dos_poligonos.append(Polygon((poligonos[i][j], 
-                                                                       poligonos[i][j+1], 
-                                                                       pontos_de_interseccao[i][1])).centroid)
+                    novos_poligonos_gerados.append(Polygon((poligonos[i][j], 
+                                                            poligonos[i][j+1], 
+                                                            pontos_de_interseccao[i][1])))
 
                 else:
-                    coordenadas, centroide = vertices_de_quadrilateros((poligonos[i][j], 
-                                                                        poligonos[i][j+1], 
-                                                                        pontos_de_interseccao[i][1], 
-                                                                        pontos_de_interseccao[i][0]))
+                    coordenadas = vertices_de_quadrilateros((poligonos[i][j], 
+                                                             poligonos[i][j+1], 
+                                                             pontos_de_interseccao[i][1], 
+                                                             pontos_de_interseccao[i][0]))[0]
                     
                     areas_dos_poligonos.append(str(Polygon(coordenadas[0]).area + Polygon(coordenadas[1]).area))
 
-                    coordenada_das_areas_dos_poligonos.append(Point(centroide))
+                    novos_poligonos_gerados.append(Polygon(coordenadas[0]).union(Polygon(coordenadas[1])))
                     
             # Área dos polígonos acima de quatro vértices
             else:
                 areas_dos_poligonos.append(np.nan)
-                coordenada_das_areas_dos_poligonos.append(Point(np.nan,np.nan))
+                novos_poligonos_gerados.append(Point(((np.nan,np.nan), 
+                                                      (np.nan,np.nan), 
+                                                      (np.nan,np.nan))))
+                
+    print()
             
-    return areas_dos_poligonos, coordenada_das_areas_dos_poligonos
+    return areas_dos_poligonos, novos_poligonos_gerados
 
 # Áreas exteriores pelo método das bissetrizes
 
@@ -79,7 +83,7 @@ def areas_e_centroides_de_exteriores(poligonos, pontos_da_rua):
             linhas_exteriores.append(coord_do_ponto)
             linhas_das_areas[i].append(coord_do_ponto)
 
-    areas_dos_poligonos, coordenada_das_areas_dos_poligonos = [[],[]]
+    areas_dos_poligonos, poligono_das_areas_dos_poligonos = [[],[]]
             
     for i in range(len(linhas_das_areas)):
         for j in range(len(linhas_das_areas[i])):
@@ -97,9 +101,9 @@ def areas_e_centroides_de_exteriores(poligonos, pontos_da_rua):
                                 tuple(linhas_das_areas[i][j][1]))
             
             areas_dos_poligonos.append(str(Polygon(coord_do_poligono).area))
-            coordenada_das_areas_dos_poligonos.append(Polygon(coord_do_poligono).centroid)
+            poligono_das_areas_dos_poligonos.append(Polygon(coord_do_poligono))
                                                       
-    return areas_dos_poligonos, coordenada_das_areas_dos_poligonos, linhas_exteriores
+    return areas_dos_poligonos, poligono_das_areas_dos_poligonos, linhas_exteriores
 
 # Lados das bissetrizes para poligonos iguais ou com mais de quatro vértices
 
