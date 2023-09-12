@@ -80,8 +80,11 @@ def exportando_informacoes_internas(poligonos,
     # Criando objetos LineString a partir das coordenadas
     linhas = [LineString(coords) for coords in coordenadas_das_linhas]
 
+    # Calculando o comprimento das linhas
+    comprimentos_das_linhas = [linha.length for linha in linhas]
+
     # Criando um novo GeoDataFrame com as linhas
-    novo_gdf_linhas = gpd.GeoDataFrame({"geometry": linhas}, crs=gdf)
+    novo_gdf_linhas = gpd.GeoDataFrame({'geometry': linhas, 'length': comprimentos_das_linhas}, crs=gdf)
 
     # Criando um novo GeoDataFrame com as áreas
     novo_gdf_areas = gpd.GeoDataFrame({'geometry': coordenada_das_areas_dos_poligonos, 'area': areas_dos_poligonos}, crs=gdf)
@@ -98,8 +101,11 @@ def exportando_informacoes_externas(coordenadas_externas,
     # Criando objetos LineString a partir das coordenadas
     linhas = [LineString(coords) for coords in coordenadas_externas]
 
+    # Calculando o comprimento das linhas
+    comprimentos_das_linhas = [linha.length for linha in linhas]
+
     # Criando um novo GeoDataFrame com as linhas
-    novo_gdf_linhas = gpd.GeoDataFrame({"geometry": linhas}, crs=gdf)
+    novo_gdf_linhas = gpd.GeoDataFrame({'geometry': linhas, 'length': comprimentos_das_linhas}, crs=gdf)
 
     # Criar as áreas (Para vê-las é necessário ativar as etiquetas nas configurações do ponto)
     novo_gdf_areas = gpd.GeoDataFrame({'geometry': poligono_das_areas_dos_poligonos, 'area': areas_dos_poligonos}, crs=gdf)
