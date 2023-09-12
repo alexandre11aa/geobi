@@ -62,9 +62,7 @@ def areas_e_centroides_de_interiores(poligonos, pontos_de_interseccao, lados_das
                 novos_poligonos_gerados.append(Point(((np.nan,np.nan), 
                                                       (np.nan,np.nan), 
                                                       (np.nan,np.nan))))
-                
-    print()
-            
+                            
     return areas_dos_poligonos, novos_poligonos_gerados
 
 # Áreas exteriores pelo método das bissetrizes
