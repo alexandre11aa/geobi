@@ -48,7 +48,7 @@ def angulos_de_um_poligono(inclinacoes):
 
         for j in range(len(inclinacoes[i]) - 1):
 
-            # Cálculo dos ângulos dos vertices do polígono em radianos: arctan(θ) = (180 / π) * [(m2 - m1) / (1 + m2 * m1)]
+            # Cálculo dos ângulos dos vertices do polígono em radianos: θ = arctan{(180 / π) * [(m2 - m1) / (1 + m2 * m1)}
             angulo = (180 / math.pi) * math.atan((inclinacoes[i][j + 1] - inclinacoes[i][j]) / (1 + inclinacoes[i][j + 1] * inclinacoes[i][j]))
 
             if angulo < 0:
