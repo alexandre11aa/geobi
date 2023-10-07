@@ -72,9 +72,9 @@ class funcoes():
             self.gdf_pontos = gpd.read_file(self.caminho_do_arquivo_2)
 
             self.gdf_retas, self.gdf_areas_2 = mdb_poligonos_externos(self.gdf_poligonos, 
-                                                                    self.gdf_pontos, 
-                                                                    self.nmr_de_vertices, 
-                                                                    self.gdf_pontos.crs)
+                                                                      self.gdf_pontos, 
+                                                                      self.nmr_de_vertices, 
+                                                                      self.gdf_pontos.crs)
 
             self.gdf_retas.to_file(self.caminho_do_arquivo_4)
             self.gdf_areas_2.to_file(self.caminho_do_arquivo_4.replace(".shp", "_areas.shp"))
