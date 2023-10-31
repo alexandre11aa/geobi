@@ -12,6 +12,6 @@ Para baixar o executável que funciona de forma independente acesse:
 
 https://drive.google.com/file/d/1u27JoaQfPNegLFrA835CD1J1uIiTV3E4/view
 
-Para ler o estudo desenvolvido para a ferramenta acesse:
+Para ler o artigo científico desenvolvido para a ferramenta acesse:
 
 https://coopex.unifip.edu.br/index.php/coopex/article/view/551
