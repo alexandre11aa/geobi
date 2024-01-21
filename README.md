@@ -20,6 +20,8 @@ https://coopex.unifip.edu.br/index.php/coopex/article/view/551
 
 # Requirements (.exe)
 
+Python 3.12.1
+
 attrs           23.2.0  
 certifi         2023.11.17  
 click           8.1.7  
