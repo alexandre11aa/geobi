@@ -2,11 +2,11 @@
 
 Ferramenta para cálculo áreas de contribuição de sistemas de drenagem urbana através do método das bissetrizes.
 
-Na pasta *script* estão presentes os códigos em Python da ferramenta executável GeoBi que funciona de forma independente. Já na pasta *plugin* estão presentes os arquivos que vão dentro do ZIP usados para instalar o GeoBi diretamente no QGIS. O único arquivo que não está presente é o *GeoBi.exe* devido ao limite de memória para arquivos no repositório. De qualquer forma, o executável funciona de maneira indepentente do QGIS, e o plug-in dentro do programa é usado apenas para aciona-lo. Essa abordagem foi escolhida no lugar de compilar os códigos diretamente no plug-in, devido à ferramente GeoBi fazer modificações diretamente nos arquivos de extensão SHP, que é usada em multiplas plataformas além do QGIS.
+Na pasta *script* estão presentes os códigos em Python da ferramenta executável GeoBi que funciona de forma independente. Já na pasta *plugin* estão presentes os arquivos que vão dentro do ZIP usados para instalar o GeoBi diretamente no QGIS 3.28.10. O único arquivo que não está presente é o *GeoBi.exe* devido ao limite de memória para arquivos no repositório. De qualquer forma, o executável funciona de maneira indepentente do QGIS 3.28.10, e o plug-in dentro do programa é usado apenas para aciona-lo. Essa abordagem foi escolhida no lugar de compilar os códigos diretamente no plug-in, devido à ferramente GeoBi fazer modificações diretamente nos arquivos de extensão SHP, que é usada em multiplas plataformas além do QGIS 3.28.10.
 
 # Anexos
 
-Para baixar a extensão no formato ZIP para instalar no QGIS acesse: 
+Para baixar a extensão no formato ZIP para instalar no QGIS 3.28.10 acesse: 
 
 https://drive.google.com/file/d/1g5TBm9Ge2fF093MvP3_IXKj-NfwNBPmV/view
 
