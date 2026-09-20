@@ -2,6 +2,7 @@ print("\nPorque para mim o viver é Cristo, e o morrer é ganho. Filipenses 1:21
 
 import sys
 import base64
+import traceback
 import geopandas as gpd
 
 from PyQt5.QtWidgets import QMainWindow, QLabel, QLineEdit, QPushButton, QComboBox, QFileDialog, QMessageBox, QApplication
@@ -12,6 +13,7 @@ from metodo_das_bissetrizes import mdb_poligonos_internos
 from metodo_das_bissetrizes import mdb_poligonos_externos
 
 from imagens_da_interface import imagens
+from importacao_e_exportacao_de_dados import salvando_shapefile_com_estilo
 
 class funcoes():
 
@@ -41,51 +43,74 @@ class funcoes():
         elif self.lista_de_lados_do_poligono.currentText() == "Qualquer número de vértices (*)":
             self.nmr_de_vertices = 1000
 
+    # Mensagem de erro com detalhes (DEBUG: remover os detalhes após validar o executável)
+    def mostrando_erro(self, e):
+
+        caixa = QMessageBox(self)
+        caixa.setIcon(QMessageBox.Critical)
+        caixa.setWindowTitle("   E R R O !")
+        caixa.setText("Não foi possível gerar os arquivos shapefile esperados, certifique-se de inserir as informações corretamente!")
+        caixa.setInformativeText(f"{type(e).__name__}: {e}")
+        caixa.setDetailedText(traceback.format_exc())
+        caixa.exec_()
+
     # Polígonos internos
     def calculo_dos_poligonos_internos(self):
 
         try:
+            # print(f"[DEBUG] Lendo poligonos: {self.caminho_do_arquivo_1!r}")
+            # print(f"[DEBUG] Saida: {self.caminho_do_arquivo_3!r} | nmr_de_vertices: {self.nmr_de_vertices}")
+
             self.gdf_poligonos = gpd.read_file(self.caminho_do_arquivo_1)
+            # print(f"[DEBUG] Poligonos lidos: {len(self.gdf_poligonos)} feicoes | CRS: {self.gdf_poligonos.crs}")
 
             self.gdf_bissetrizes, self.gdf_areas_1 = mdb_poligonos_internos(self.gdf_poligonos, 
                                                                             self.nmr_de_vertices, 
                                                                             self.gdf_poligonos.crs)
+            # print(f"[DEBUG] Calculo ok: {len(self.gdf_bissetrizes)} linhas, {len(self.gdf_areas_1)} areas")
 
-            self.gdf_bissetrizes.to_file(self.caminho_do_arquivo_3)
-            self.gdf_areas_1.to_file(self.caminho_do_arquivo_3.replace(".shp", "_areas.shp"))
+            salvando_shapefile_com_estilo(self.gdf_bissetrizes, self.caminho_do_arquivo_3, 'linha', 'length')
+            salvando_shapefile_com_estilo(self.gdf_areas_1, self.caminho_do_arquivo_3.replace(".shp", "_areas.shp"), 'ponto', 'area')
 
             QMessageBox.information(self, "   A V I S O !", "Arquivos shapefiles gerados com sucesso!")
 
         except Exception as e:
 
-            QMessageBox.critical(self, "   E R R O !", "Não foi possível gerar os arquivos shapefile esperados, certifique-se de inserir as informações corretamente!")
+            self.mostrando_erro(e)
 
-            print(e)
+            # print(f"[DEBUG] ERRO: {type(e).__name__}: {e}")
+            traceback.print_exc()
 
     # Polígonos externos
     def calculo_dos_poligonos_externos(self):
 
         try:
+            # print(f"[DEBUG] Lendo poligonos: {self.caminho_do_arquivo_1!r} | pontos: {self.caminho_do_arquivo_2!r}")
+            # print(f"[DEBUG] Saida: {self.caminho_do_arquivo_4!r} | nmr_de_vertices: {self.nmr_de_vertices}")
 
             self.gdf_poligonos = gpd.read_file(self.caminho_do_arquivo_1)
+            # print(f"[DEBUG] Poligonos lidos: {len(self.gdf_poligonos)} feicoes | CRS: {self.gdf_poligonos.crs}")
 
             self.gdf_pontos = gpd.read_file(self.caminho_do_arquivo_2)
+            # print(f"[DEBUG] Pontos lidos: {len(self.gdf_pontos)} feicoes | CRS: {self.gdf_pontos.crs}")
 
             self.gdf_retas, self.gdf_areas_2 = mdb_poligonos_externos(self.gdf_poligonos, 
                                                                       self.gdf_pontos, 
                                                                       self.nmr_de_vertices, 
                                                                       self.gdf_pontos.crs)
+            # print(f"[DEBUG] Calculo ok: {len(self.gdf_retas)} linhas, {len(self.gdf_areas_2)} areas")
 
-            self.gdf_retas.to_file(self.caminho_do_arquivo_4)
-            self.gdf_areas_2.to_file(self.caminho_do_arquivo_4.replace(".shp", "_areas.shp"))
+            salvando_shapefile_com_estilo(self.gdf_retas, self.caminho_do_arquivo_4, 'linha', 'length')
+            salvando_shapefile_com_estilo(self.gdf_areas_2, self.caminho_do_arquivo_4.replace(".shp", "_areas.shp"), 'ponto', 'area')
 
             QMessageBox.information(self, "   A V I S O !", "Arquivos shapefiles gerados com sucesso!")
 
         except Exception as e:
 
-            QMessageBox.critical(self, "   E R R O !", "Não foi possível gerar os arquivos shapefile esperados, certifique-se de inserir as informações corretamente!")
+            self.mostrando_erro(e)
 
-            print(e)
+            # print(f"[DEBUG] ERRO: {type(e).__name__}: {e}")
+            traceback.print_exc()
 
     # Procurando arquivo de polígonos de lote
     def procurar_1(self):
@@ -125,8 +150,7 @@ class funcoes():
         mensagem  = 'Para que o cálculo funcione corretamente, é preciso inserir um arquivo shapefile com polígonos regulares desenhados. '
         mensagem += 'O gerador de lotes irá calcular e gerar as linhas das bissetrizes para polígonos com qualquer quantidade de vertices, '
         mensagem += 'e calculará as áreas na unidade do SRC escolhido, dos polígonos iguais ou menores que quatro vertices gerando pontos em '
-        mensagem += 'seus centros. Para visualizar os valores das áreas no QGIS é preciso habilitar as etiquetas, caso contrário, apenas '
-        mensagem += 'pontos aparecerão.'
+        mensagem += 'seus centros. As etiquetas já vêm habilitadas no QGIS.'
 
         QMessageBox.information(self, "   A J U D A !", mensagem)
 
@@ -136,8 +160,8 @@ class funcoes():
         mensagem  = 'Para que o cálculo funcione corretamente, é preciso que o arquivo shapefile anterior com polígonos continue o mesmo, '
         mensagem += 'e seja inserido um novo arquivo shapefile de pontos que delimitem a distância dos vértices dos polígonos aos possíveis '
         mensagem += 'poços de visita ou cruzamentos. O gerador de ruas irá calcular e gerar as linhas e calculará as áreas na unidade do SRC '
-        mensagem += 'escolhido, dos polígonos iguais ou menores que quatro vertices gerando pontos em seus centros. Para visualizar os '
-        mensagem += 'valores das áreas no QGIS é preciso habilitar as etiquetas, caso contrário, apenas pontos aparecerão.'
+        mensagem += 'escolhido, dos polígonos iguais ou menores que quatro vertices gerando pontos em seus centros. '
+        mensagem += 'As etiquetas já vêm habilitadas no QGIS.'
 
         QMessageBox.information(self, "   A J U D A !", mensagem)
 

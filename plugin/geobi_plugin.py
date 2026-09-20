@@ -46,4 +46,14 @@ class GeoBi:
 
         # Abrindo executável do GeoBi no QGis
         executable_path = os.path.join(os.path.split(inspect.getfile(inspect.currentframe()))[0], 'GeoBi.exe')
-        subprocess.Popen([executable_path])
+
+        # Removendo variáveis do QGis que conflitam com as bibliotecas GDAL/PROJ/Qt embutidas no executável
+        env = os.environ.copy()
+
+        for var in ('PROJ_LIB', 'PROJ_DATA', 'GDAL_DATA', 'GDAL_DRIVER_PATH', 'GEOTIFF_CSV',
+                    'PYTHONHOME', 'PYTHONPATH', 'QT_PLUGIN_PATH', 'QT_QPA_PLATFORM_PLUGIN_PATH'):
+            env.pop(var, None)
+
+        env['PATH'] = os.pathsep.join(p for p in env.get('PATH', '').split(os.pathsep) if 'qgis' not in p.lower())
+
+        subprocess.Popen([executable_path], env=env, cwd=os.path.dirname(executable_path))

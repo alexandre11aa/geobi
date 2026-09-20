@@ -2,11 +2,11 @@
 
 Ferramenta para cálculo áreas de contribuição de sistemas de drenagem urbana através do método das bissetrizes.
 
-Na pasta *script* estão presentes os códigos em Python da ferramenta executável GeoBi que funciona de forma independente. Já na pasta *plugin* estão presentes os arquivos que vão dentro do ZIP usados para instalar o GeoBi diretamente no QGIS 3.28.10. O único arquivo que não está presente é o *GeoBi.exe* devido ao limite de memória para arquivos no repositório. De qualquer forma, o executável funciona de maneira indepentente do QGIS 3.28.10, e o plug-in dentro do programa é usado apenas para aciona-lo. Essa abordagem foi escolhida no lugar de compilar os códigos diretamente no plug-in, devido à ferramente GeoBi fazer modificações diretamente nos arquivos de extensão SHP, que é usada em multiplas plataformas além do QGIS 3.28.10.
+Na pasta *script* estão presentes os códigos em Python da ferramenta executável GeoBi que funciona de forma independente. Já na pasta *plugin* estão presentes os arquivos que vão dentro do ZIP usados para instalar o GeoBi diretamente no QGIS (versões 3.28.10 a 3.44.14). O único arquivo que não está presente é o *GeoBi.exe* devido ao limite de memória para arquivos no repositório. De qualquer forma, o executável funciona de maneira indepentente do QGIS (versões 3.28.10 a 3.44.14), e o plug-in dentro do programa é usado apenas para aciona-lo. Essa abordagem foi escolhida no lugar de compilar os códigos diretamente no plug-in, devido à ferramente GeoBi fazer modificações diretamente nos arquivos de extensão SHP, que é usada em multiplas plataformas além do QGIS (versões 3.28.10 a 3.44.14).
 
 # Anexos
 
-Para baixar a extensão no formato ZIP para instalar no QGIS 3.28.10 acesse: 
+Para baixar a extensão no formato ZIP para instalar no QGIS (versões 3.28.10 a 3.44.14) acesse: 
 
 https://drive.google.com/file/d/1g5TBm9Ge2fF093MvP3_IXKj-NfwNBPmV/view
 
@@ -20,32 +20,43 @@ https://editora.unifip.edu.br/index.php/coopex/article/view/551
 
 # Requirements (.exe)
 
-Python 3.12.1
+Python 3.11.0
 
-attrs           23.2.0  
-certifi         2023.11.17  
-click           8.1.7  
-click-plugins   1.1.1  
-cligj           0.7.2  
-colorama        0.4.6  
-fiona           1.9.5  
-geopandas       0.14.2  
-mpmath          1.3.0  
-numpy           1.26.3  
-packaging       23.2  
-pandas          2.2.0  
-pip             23.2.1  
-pyproj          3.6.1  
-PyQt5           5.15.10  
-PyQt5-Qt5       5.15.2  
-PyQt5-sip       12.13.0  
-python-dateutil 2.8.2  
-pytz            2023.3.post1  
-scipy           1.12.0  
-setuptools      69.0.3  
-shapely         2.0.2  
-six             1.16.0  
-sympy           1.12  
-tzdata          2023.4  
+Instalação: `pip install -r requirements.txt`
+
+altgraph                 0.17.5  
+certifi                  2026.7.22  
+geopandas                1.0.1  
+mpmath                   1.3.0  
+numpy                    2.1.3  
+packaging                26.3  
+pandas                   2.2.3  
+pefile                   2024.8.26  
+pillow                   12.3.0  
+pyinstaller              6.22.3  
+pyinstaller-hooks-contrib 2026.7  
+pyogrio                  0.11.0  
+pyproj                   3.7.1  
+PyQt5                    5.15.11  
+PyQt5-Qt5                5.15.2  
+PyQt5_sip                12.19.0  
+python-dateutil          2.9.0.post0  
+pytz                     2026.3.post1  
+pywin32-ctypes           0.2.3  
+scipy                    1.15.3  
+shapely                  2.1.0  
+six                      1.17.0  
+sympy                    1.14.0  
+tzdata                   2026.4  
 
 Sistema operacional: Windows
+
+# Gerando o executável (.exe)
+
+Na pasta *script*, com o ambiente virtual ativo:
+
+```
+pyinstaller --onefile --noconsole --clean --name GeoBi --icon ..\plugin\icone_de_mdb.png --distpath ..\plugin --collect-all pyogrio --collect-all pyproj --collect-all shapely --collect-all geopandas interface_grafica_mdb.pyw
+```
+
+O *GeoBi.exe* é gerado diretamente na pasta *plugin*.
