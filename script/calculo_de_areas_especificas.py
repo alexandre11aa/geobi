@@ -59,9 +59,7 @@ def areas_e_centroides_de_interiores(poligonos, pontos_de_interseccao, lados_das
             # Área dos polígonos acima de quatro vértices
             else:
                 areas_dos_poligonos.append(np.nan)
-                novos_poligonos_gerados.append(Point(((np.nan,np.nan), 
-                                                      (np.nan,np.nan), 
-                                                      (np.nan,np.nan))))
+                novos_poligonos_gerados.append(Point(np.nan, np.nan))
                             
     return areas_dos_poligonos, novos_poligonos_gerados
 
