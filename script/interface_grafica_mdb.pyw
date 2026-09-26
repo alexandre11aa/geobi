@@ -280,6 +280,11 @@ class interface(QMainWindow, funcoes):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+
+    icone_app = QPixmap()
+    icone_app.loadFromData(base64.b64decode(imagens('icone')))
+    app.setWindowIcon(QIcon(icone_app))
+
     window = interface()
     window.setWindowState(Qt.WindowNoState)
     window.show()
