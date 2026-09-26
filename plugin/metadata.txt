@@ -1,6 +1,7 @@
 [general]
 name=GeoBi
 qgisMinimumVersion=3.0
+qgisMaximumVersion=4.99
 about=Ferramenta para cálculo áreas de contribuição, em sistemas de microdrenagem, através do método das bissetrizes.
 description=Método das bissetrizes
 version=0.1
